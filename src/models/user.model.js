@@ -1,39 +1,18 @@
 const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema({
-    name: {
-        type: String,
-        required: true,
-        trim: true,
-        minlength: 1,
-        maxlength: 50
+        name: {type: String, required:true},
+        lastname: {type: String, required:true},
+        email: {type: String, required:true},
+        password: {type: String, required:true, max: 1024, min: 6}
     },
-    lastname:{
-        type: String,
-        required: true,
-        trim: true,
-        minlength: 1,
-        maxlength: 50
-    },
-    email: {
-        type: String,
-        required: true,
-        trim: true,
-        minlength: 1,
-        maxlength: 100,
-        unique: true
-    },
-    password: {
-        type: String,
-        required: true,
-        trim: true,
-        minlength: 1,
-        maxlength: 100
-    }
-},{
-    collation: "users",
-    timestamps: true
-});
+    {
+        collation: {
+            locale: 'en_US',
+            strength: 1
+        },
+        timestamps: true
+    })
 
 const user = mongoose.model("users", userSchema)
 

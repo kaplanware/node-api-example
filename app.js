@@ -1,8 +1,10 @@
+require("express-async-errors");
 const express = require('express');
 const app = express();
 require("dotenv").config();
 require("./src/db/dbCollection");
 const port = process.env.PORT || 5001;
+const errorHandlerMiddleware = require("./src/middlewares/errorHandler");
 
 // Middlewares
 // app.use(express.json());
@@ -20,6 +22,9 @@ app.get('/', (req, res) => {
     })
 });
 
+// Error Handler
+app.use(errorHandlerMiddleware);
+// Error Handler
 
 app.listen(port, () => {
     console.log(`Server ${port} portunda başlatıldı`);
